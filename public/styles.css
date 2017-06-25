@@ -1,0 +1,14 @@
+
+/*should see a blue h1 tag if the files are linked*/
+h1{
+   color: blue;
+}
+
+.guessed-word {
+    display: flex;
+    flex-direction: row;
+}
+
+.guessed-word p {
+    margin-left: 10px;
+}
