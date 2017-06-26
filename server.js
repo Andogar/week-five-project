@@ -3,6 +3,7 @@ const express = require('express');
 const mustache = require('mustache-express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const authentication = require('./middlewares/authentication-middleware');
 
 const homeController = require('./controllers/home-controller');
 const gameController = require('./controllers/game-controller');
@@ -20,16 +21,9 @@ application.use(session({
     saveUninitialized: true
 }));
 
-application.use(bodyParser.urlencoded());
-
 application.use('/public', express.static('./public'));
-
-application.use(function (request, response, next) {
-    if (request.session.isAuthenticated === undefined) {
-        request.session.isAuthenticated = false;
-    }
-    next();
-});
+application.use(bodyParser.urlencoded());
+application.use(authentication);
 
 
 application.use(homeController);
