@@ -28,23 +28,21 @@ router.get('/game', (request, response) => {
 router.post('/game', (request, response) => {
     request.session.guess = request.body.guess.toUpperCase();
     request.session.error = "";
-    if (!request.body.guess.match(/[a-zA-Z]/)) {
+    if (request.body.guess.length > 1 || request.body.guess.length == 0) {
+        request.session.error = "Please only enter one character at a time.";
+        response.render('game', request.session);
+    } else if (!request.session.guess.match(/[A-Z]/)) {
         request.session.error = "Please enter a valid character.";
         response.render('game', request.session);
     } else if (request.session.totalGuesses.indexOf(request.session.guess) != -1) {
         request.session.error = "You have already guessed that, try again.";
         response.render('game', request.session);
-    } else if (request.body.guess.length > 1 || request.body.guess.length == 0) {
-        request.session.error = "Only enter one character at a time.";
-        response.render('game', request.session);
-
     } else {
-        request.session.totalGuesses.push(" " + request.session.guess);
+        request.session.totalGuesses.push(request.session.guess);
         if (request.session.wordArray.indexOf(request.session.guess) != -1) {
             request.session.correctGuesses.push(request.session.guess);
             checkCharacter(request.session.wordArray, request.session.guess);
             showLetter(request.session.blankLetters, request.session.letters, request.session.guess)
-
             if (request.session.wordArray.length === 0) {
                 request.session.wonGame = true;
                 response.redirect('/win');

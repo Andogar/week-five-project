@@ -8,26 +8,23 @@
 </head>
 
 <body>
-    <h1>Hangman</h1>
-    <h2>{{chosenWord}}</h2>
-    <p>Guesses Remaining: {{guesses}}</p>
-    <br />
-    <br />
+    <main class="game-page">
+        <h1>Hangman</h1>
+        <h2>{{chosenWord}}</h2>
+        <p>Guesses Remaining: {{guesses}}</p>
+        <div class='guessed-word'>
+            {{#blankLetters}}<p>{{.}}</p>{{/blankLetters}}
+        </div>
 
-    <div class='guessed-word'>
-        {{#blankLetters}}<p>{{.}}</p>{{/blankLetters}}
-    </div>
-
-    <form action='/game' method='POST'>
-        <input type="text" name="guess" placeholder="Your guess" />
-        <button type="submit">Guess</button>
-    </form>
-    <p>Your last guess: {{guess}}</p>
-    <p>All guesses: {{totalGuesses}}</p>
-    <p>{{error}}</p>
-    <script type="text/javascript" src='../public/main.js'>
-
-    </script>
+        <form action='/game' method='POST'>
+            <input type="text" name="guess" placeholder="Your guess" />
+            <button type="submit">Guess</button>
+        </form>
+        <p>Your last guess: {{guess}}</p>
+        <p>All guesses: </p>
+        <p>{{totalGuesses}}</p>
+        <p>{{error}}</p>
+    </main>
 </body>
 
 </html>

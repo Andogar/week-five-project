@@ -1,14 +1,54 @@
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
 
-/*should see a blue h1 tag if the files are linked*/
-h1{
-   color: blue;
+.game-page {
+    text-align: center;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.game-page input, .game-page button {
+    height: 40px;
+    width: 100px;
+    font-size: 1rem;
+}
+
+.game-start {
+    text-align: center;
+    font-size: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.game-start > a {
+    text-decoration: none;
+    color: blue;
 }
 
 .guessed-word {
     display: flex;
-    flex-direction: row;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .guessed-word p {
-    margin-left: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.win-loss-page {
+    text-align: center;
+}
+
+.win-loss-page a {
+    text-decoration: none;
+    font-size: 2rem;
+    color: blue;
 }

@@ -20,7 +20,6 @@ application.use(session({
     resave: false,
     saveUninitialized: true
 }));
-
 application.use('/public', express.static('./public'));
 application.use(bodyParser.urlencoded());
 application.use(authentication);
