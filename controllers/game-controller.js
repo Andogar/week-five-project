@@ -14,11 +14,10 @@ router.get('/game', (request, response) => {
         request.session.incorrectGuesses = [];
         request.session.blankLetters = [];
         request.session.guess = '';
-        request.session.guesses = 20;
+        request.session.guesses = 8;
         for (var i = 0; i < request.session.wordArray.length; i++) {
             request.session.blankLetters.push("_");
         }
-
         var newGame = request.session;
         response.render('game', newGame);
     } else {
@@ -29,12 +28,16 @@ router.get('/game', (request, response) => {
 router.post('/game', (request, response) => {
     request.session.guess = request.body.guess.toUpperCase();
     request.session.error = "";
-    if (request.body.guess.length > 1 || request.body.guess.length == 0) {
-        request.session.error = "You have entered an invalid guess.";
+    if (!request.body.guess.match(/[a-zA-Z]/)) {
+        request.session.error = "Please enter a valid character.";
         response.render('game', request.session);
     } else if (request.session.totalGuesses.indexOf(request.session.guess) != -1) {
         request.session.error = "You have already guessed that, try again.";
         response.render('game', request.session);
+    } else if (request.body.guess.length > 1 || request.body.guess.length == 0) {
+        request.session.error = "Only enter one character at a time.";
+        response.render('game', request.session);
+
     } else {
         request.session.totalGuesses.push(" " + request.session.guess);
         if (request.session.wordArray.indexOf(request.session.guess) != -1) {
