@@ -18,8 +18,7 @@ router.get('/game', (request, response) => {
         for (var i = 0; i < request.session.wordArray.length; i++) {
             request.session.blankLetters.push("_");
         }
-        var newGame = request.session;
-        response.render('game', newGame);
+        response.render('game', request.session);
     } else {
         response.redirect('/');
     }
